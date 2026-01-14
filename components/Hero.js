@@ -33,8 +33,8 @@ export class Hero {
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat">
-                            <div class="stat-value">Early</div>
-                            <div class="stat-label">R&D</div>
+                            <div class="stat-value">8+</div>
+                            <div class="stat-label">Prototypes Built</div>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat">
