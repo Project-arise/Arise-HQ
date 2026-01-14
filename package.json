@@ -1,0 +1,17 @@
+{
+  "name": "arise-hq",
+  "version": "1.0.0",
+  "description": "ARISE HQ - Next-gen robotics startup website",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'No build needed for static site'",
+    "deploy": "echo 'Deploy using Vercel/Netlify CLI'"
+  },
+  "keywords": ["robotics", "ai", "startup", "tech"],
+  "author": "ARISE Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

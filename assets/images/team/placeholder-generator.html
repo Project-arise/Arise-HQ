@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate 7 Team Member Placeholders</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #0d1117; color: white; }
+        .preview { margin: 20px; display: inline-block; text-align: center; }
+        canvas { border: 2px solid #00a8ff; border-radius: 50%; margin: 10px; }
+        .download-btn { 
+            display: block; 
+            margin: 10px auto; 
+            padding: 10px 20px; 
+            background: #00a8ff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            text-decoration: none;
+            width: 200px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Team Member Placeholder Images</h1>
+        <p>Click each button to download placeholder images for your team members.</p>
+        
+        <div class="grid" id="previews"></div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: rgba(0,168,255,0.1); border-radius: 10px;">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Click each download button to save the image</li>
+                <li>Save them in the <code>assets/images/team/</code> folder</li>
+                <li>Make sure the filenames match exactly:
+                    <ul>
+                        <li>alex-mercer.jpg</li>
+                        <li>maya-chen.jpg</li>
+                        <li>jordan-rivera.jpg</li>
+                        <li>samira-khan.jpg</li>
+                        <li>leo-zhang.jpg</li>
+                        <li>priya-sharma.jpg</li>
+                        <li>kai-tanaka.jpg</li>
+                    </ul>
+                </li>
+                <li>Replace "Kai Tanaka" with your own name and photo</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        const team = [
+            { name: "Alex Mercer", color: "#00a8ff", filename: "alex-mercer.jpg" },
+            { name: "Maya Chen", color: "#9c88ff", filename: "maya-chen.jpg" },
+            { name: "Jordan Rivera", color: "#fbc531", filename: "jordan-rivera.jpg" },
+            { name: "Samira Khan", color: "#00a8ff", filename: "samira-khan.jpg" },
+            { name: "Leo Zhang", color: "#ff6b6b", filename: "leo-zhang.jpg" },
+            { name: "Priya Sharma", color: "#1dd1a1", filename: "priya-sharma.jpg" },
+            { name: "Kai Tanaka", color: "#ff9ff3", filename: "kai-tanaka.jpg" }
+        ];
+
+        team.forEach(member => {
+            const preview = document.createElement('div');
+            preview.className = 'preview';
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 400;
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient background
+            const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+            gradient.addColorStop(0, member.color);
+            gradient.addColorStop(1, lightenColor(member.color, -20));
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 400, 400);
+            
+            // Add initial with glow effect
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 160px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(member.name.charAt(0), 200, 200);
+            
+            // Remove shadow for text
+            ctx.shadowBlur = 0;
+            
+            // Add name below
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText(member.name, 200, 350);
+            
+            // Create download button
+            const link = document.createElement('a');
+            link.className = 'download-btn';
+            link.download = member.filename;
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.textContent = `Download ${member.filename}`;
+            
+            preview.appendChild(canvas);
+            preview.appendChild(link);
+            
+            document.getElementById('previews').appendChild(preview);
+        });
+
+        function lightenColor(color, percent) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
+            
+            return "#" + (
+                0x1000000 +
+                (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                (B < 255 ? (B < 1 ? 0 : B) : 255)
+            ).toString(16).slice(1);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Project Placeholders</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .preview { margin: 20px; display: inline-block; }
+        canvas { border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h2>Generate Project Placeholder Images</h2>
+    <div id="previews"></div>
+    
+    <script>
+        const projects = [
+            { name: "Project AEGIS", filename: "aegis.png", color: "#4cd964" },
+            { name: "NEXUS Core", filename: "nexus.png", color: "#00a8ff" },
+            { name: "CORTEX AI", filename: "cortex.png", color: "#9c88ff" },
+            { name: "SENTINEL Network", filename: "sentinel.png", color: "#fbc531" }
+        ];
+
+        projects.forEach(project => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 400;
+            const ctx = canvas.getContext('2d');
+            
+            // Dark background
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, 600, 400);
+            
+            // Project name
+            ctx.fillStyle = project.color;
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(project.name, 300, 150);
+            
+            // Status indicator
+            ctx.beginPath();
+            ctx.arc(300, 250, 40, 0, Math.PI * 2);
+            ctx.fillStyle = project.color + '40';
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(300, 250, 30, 0, Math.PI * 2);
+            ctx.fillStyle = project.color;
+            ctx.fill();
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.download = project.filename;
+            link.href = canvas.toDataURL('image/png');
+            link.textContent = `Download ${project.filename}`;
+            
+            const preview = document.createElement('div');
+            preview.className = 'preview';
+            preview.innerHTML = `<div>${project.name}</div>`;
+            preview.appendChild(canvas);
+            preview.appendChild(document.createElement('br'));
+            preview.appendChild(link);
+            
+            document.getElementById('previews').appendChild(preview);
+        });
+    </script>
+</body>
+</html>
