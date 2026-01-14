@@ -28,13 +28,13 @@ export class Hero {
                     
                     <div class="hero-stats">
                         <div class="stat">
-                            <div class="stat-value">4</div>
+                            <div class="stat-value">7</div>
                             <div class="stat-label">Core Members</div>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat">
-                            <div class="stat-value">12+</div>
-                            <div class="stat-label">Years Experience</div>
+                            <div class="stat-value">Early</div>
+                            <div class="stat-label">R&D</div>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat">
