@@ -66,7 +66,7 @@ export const teamMembers = [
   social: {
             instagram: "@vishu_910", // Add Instagram
             twitter: "@vishu_910",
-            linkedin: "metla-vishnuvardhan",
+            linkedin: "linkedin.com/in/metla-vishnuvardhan",
             github: "VishnuV5",
             email: "vishnuvardhankumar910@gmail.com"
         },
@@ -131,7 +131,7 @@ export const teamMembers = [
         social: {
             instagram: "@r_a_h_u_l_p_21", // Add Instagram
             twitter: "@",
-            linkedin: "pampuram-rahul",
+            linkedin: "linkedin.com/in/pampuram-rahul",
             github: "",
             email: "rahulpamapuram891@gmail.com"
         },
@@ -195,7 +195,7 @@ export const teamMembers = [
   ],
 
   social: {
-    instagram: "",
+    instagram: "@sharanya_sukrutha",
     twitter: "",
     linkedin: "linkedin.com/in/sharanya2005",
     github: "github.com/shaxxxxxx",
