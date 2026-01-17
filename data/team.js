@@ -1,121 +1,299 @@
 export const teamMembers = [
     {
-        id: 1,
-        name: "Alex Mercer",
-        role: "Founder & Lead Robotics Engineer",
-        tagline: "Building machines that think",
-        bio: "Former SpaceX engineer with 10+ years in autonomous systems. Spearheads ARISE's core robotics architecture.",
-        detailedBio: "Alex graduated from MIT with dual degrees in Robotics and Computer Science. After 7 years at SpaceX working on autonomous landing systems, he founded ARISE to bring space-grade autonomy to terrestrial applications. His expertise spans from low-level embedded systems to high-level AI architectures.",
-        skills: ["Robotics", "AI/ML", "System Architecture", "Computer Vision", "Embedded Systems", "ROS/ROS2"],
-        expertise: ["Autonomous Navigation", "Sensor Fusion", "Real-time Systems", "Hardware-Software Co-design"],
-        projects: ["Project AEGIS", "NEXUS Core", "CHASSIS v2"],
-        achievements: [
-            "IEEE Robotics Award 2023",
-            "MIT Innovator Under 35",
-            "5 Patents in Autonomous Systems",
-            "TEDx Speaker on Future of Robotics"
-        ],
-        education: [
-            "MIT - PhD Robotics (Summa Cum Laude)",
-            "Stanford - MS Computer Science",
-            "Caltech - BS Electrical Engineering"
-        ],
-        experience: [
-            "SpaceX - Senior Robotics Engineer (7 years)",
-            "Boston Dynamics - Research Intern",
-            "DARPA - Consultant for Robotics Challenges"
-        ],
-        social: {
-            instagram: "@alexm.robotics", // Add Instagram
-            twitter: "@alexm",
-            linkedin: "alexm-robotics",
-            github: "alexm-r",
-            email: "alex@arisehq.tech"
+  id:3 ,
+  name: "Metla Vishnu Vardhan Kumar",
+  role: "Founder | Robotics & IoT Builder | Systems Generalist",
+  tagline: "Builds first, figures out later",
+
+  bio: "Engineering undergraduate working across robotics, IoT, automation, and system integration. Founder of Project ARISE, focused on building real prototypes through experimentation, teamwork, and iteration.",
+
+  detailedBio: "Currently pursuing B.Tech in Computer Science & IoT, with a diploma background in Automobile Engineering. I work hands-on across robotics, IoT systems, electronics, mechanical design, and basic software. My journey has been chaotic—multiple projects, competitions, hackathons, leadership roles, and failed attempts—but driven by a constant need to build real systems rather than stay in theory. And founded Project ARISE by bringing together people from different disciplines, with the long-term goal of building an assistant robot capable of emotional intelligence for mental support and physical assistance. Still learning, still building, still under construction.",
+
+  skills: {
+  robotics_and_iot: [
+    "Robotics Basics",
+    "IoT Systems",
+    "Microcontrollers (Arduino-class)",
+    "ESP8266 (Exposure)",
+    "Sensors & Actuators",
+    "Automation Logic",
+    "ROS2 (Learning Stage)"
+  ],
+
+  electronics_and_embedded: [
+    "Electronics Integration",
+    "Embedded Programming (Basic)",
+    "Motor Control (DC & Servo)",
+    "Power Management",
+    "Hardware Debugging"
+  ],
+
+  software_and_programming: [
+    "Python",
+    "Basic C / C++",
+    "Control Logic",
+    "Web Development (Basic)",
+    "Vibe Coding"
+  ],
+
+  mechanical_and_design: [
+    "Mechanical Engineering Fundamentals",
+    "CAD & Simulations",
+    "Chassis & Structure Understanding",
+    "Vehicle Inspection & Automotive Problem Solving"
+  ],
+
+  leadership_and_execution: [
+    "Project Management",
+    "Team Coordination",
+    "Leadership",
+    "Communication",
+    "Cross-Disciplinary Collaboration"
+  ],
+
+  business_and_operations: [
+    "Business & Billing Management",
+    "Lead Generation",
+    "Operations Support"
+  ]
+}
+,
+
+  expertise: [
+    "System-Level Thinking",
+    "Cross-Domain Integration",
+    "Rapid Prototyping",
+    "Problem Solving Under Constraints",
+    "Team-Based Execution"
+  ],
+
+  projects: [
+    "Project ARISE (Founder & Core Builder)",
+    "Basic Rover – VISHESH 2025 (2nd Prize, 300+ Projects)",
+    "Line-Following Robot – VISHESH 2024 (1st Prize)",
+    "AquabotX Hackathon – Real-Time Fish Monitoring System (Team Member)",
+    "RC / Rover Platforms (Multiple Iterations)",
+    "Automation & Sensor-Based Experiments",
+    "Web Demo & Prototype Websites"
+  ],
+
+  achievements: [
+    "1st Prize – VISHESH 2024 Inter-College Expo",
+    "2nd Prize – VISHESH 2025 Overall College Competition",
+    "Led and supported teams that exceeded expectations",
+    "Founded Project ARISE as a multi-disciplinary build initiative"
+  ],
+
+  education: [
+    "B.Tech – Computer Science & Internet of Things (Ongoing, Expected 2027)",
+    "Diploma – Automobile Engineering (Completed 2024)"
+  ],
+
+  experience: [
+    "Growth Intern – Student Tribe (Past)",
+    "Robotics Lead – The CLUB (Short-term)",
+    "Hackathon & Competition Team Member",
+    "Independent Robotics & IoT Builds"
+  ],
+
+  social: {
+            instagram: "@vishu_910", // Add Instagram
+            twitter: "@vishu_910",
+            linkedin: "metla-vishnuvardhan",
+            github: "VishnuV5",
+            email: "vishnuvardhankumar910@gmail.com"
         },
-        photoColor: "#00a8ff",
-        avatar: "./assets/images/team/alex-mercer.jpg",
-        joined: "2021",
-        location: "San Francisco, CA",
-        category: "leadership"
-    },
+
+  photoColor: "#00a8ff",
+  avatar: "./assets/images/team/Vishnu.jpg",
+  joined: "2025",
+  location: "Hyderabad, India",
+  category: "leadership"
+}
+,
     {
         id: 2,
-        name: "Dr. Maya Chen",
-        role: "Head of AI Research",
-        tagline: "Teaching robots to understand",
-        bio: "PhD in Cognitive Robotics from Stanford. Leads ARISE's neural architecture development.",
-        detailedBio: "Maya's research focuses on making AI systems more interpretable and trustworthy. Her work on neural-symbolic integration has been published in top AI conferences including NeurIPS and ICML. She believes the key to safe autonomy lies in systems that can explain their decisions.",
-        skills: ["Machine Learning", "Neural Networks", "Cognitive Systems", "NLP", "Reinforcement Learning", "Explainable AI"],
-        expertise: ["Neural-Symbolic AI", "Multi-modal Learning", "Cognitive Architectures", "Trustworthy AI"],
-        projects: ["CORTEX AI", "Project AEGIS", "SYNAPSE Framework"],
-        achievements: [
-            "NeurIPS Best Paper Award",
-            "TED AI 2023 Speaker",
-            "Forbes 30 Under 30 - Technology",
-            "OpenAI Research Grant Recipient"
-        ],
-        education: [
-            "Stanford University - PhD Cognitive Robotics",
-            "Carnegie Mellon - MS Machine Learning",
-            "University of Toronto - BS Computer Science"
-        ],
-        experience: [
-            "Google Brain - Research Scientist (4 years)",
-            "DeepMind - AI Safety Research",
-            "MIT Media Lab - Visiting Researcher"
-        ],
+        name: "Pampuram Rahul",
+        role: "Pitching & Documentation Lead | AI Automation Contributor",
+  tagline: "Turns ideas into clarity",
+
+  bio: "Leads pitching, documentation, and communication for Project ARISE. Works on AI/ML-based automations while representing ARISE through presentations, events, and public communication.",
+
+  detailedBio: "Plays a key role in shaping how ARISE communicates its ideas, projects, and vision. Responsible for pitching decks, technical documentation, and structured storytelling around builds. Has hands-on exposure to AI/ML automations and enjoys simplifying complex technical concepts for diverse audiences. Actively involved in hosting events, speaking sessions, and acting as the public voice of ARISE during presentations and discussions.",
+
+  skills: {
+    communication_and_presentation: [
+      "Public Speaking",
+      "Pitching & Storytelling",
+      "Technical Presentation",
+      "Event Hosting",
+      "Stakeholder Communication"
+    ],
+
+    documentation_and_strategy: [
+      "Technical Documentation",
+      "Pitch Deck Creation",
+      "Project Explanation & Structuring",
+      "Problem–Solution Framing"
+    ],
+
+    ai_and_automation: [
+      "AI/ML Concepts",
+      "Automation Workflows",
+      "Python (Applied for Automation)",
+      "AI Tool Integration"
+    ],
+
+    collaboration_and_execution: [
+      "Cross-Team Coordination",
+      "Idea Validation",
+      "Requirement Gathering",
+      "Team Communication"
+    ]
+  },
+
+  expertise: [
+    "Pitching Technical Ideas",
+    "Explaining Complex Systems Clearly",
+    "Representing Teams in Public Forums",
+    "Bridging Technical and Non-Technical Audiences"
+  ],
+
+  projects: [
+    "Project ARISE – Pitching & Documentation",
+    "AI-Based Automation Experiments",
+    "Event Hosting & Technical Presentations"
+  ],
+
+  achievements: [
+    "Led pitching and documentation for ARISE initiatives",
+    "Hosted and moderated multiple events",
+    "Recognized as a strong communicator and presenter"
+  ],
+
+  education: [
+    "B.Tech – Artificial Intelligence & Machine Learning (Ongoing, Expected 2027)"
+  ],
+
+  experience: [
+    "Pitching & Documentation Lead – Project ARISE",
+    "Event Host & Presenter"
+  ],
         social: {
-            instagram: "@alexm.robotics", // Add Instagram
-            twitter: "@dr_maya",
-            linkedin: "mayachen-ai",
-            github: "maya-ai",
-            email: "maya@arisehq.tech"
+            instagram: "@r_a_h_u_l_p_21", // Add Instagram
+            twitter: "@",
+            linkedin: "pampuram-rahul",
+            github: "",
+            email: "rahulpamapuram891@gmail.com"
         },
         photoColor: "#9c88ff",
-        avatar: "./assets/images/team/maya-chen.jpg",
+        avatar: "./assets/images/team/Rahul.jpg",
         joined: "2021",
         location: "Boston, MA",
         category: "research"
     },
     {
-        id: 3,
-        name: "Jordan Rivera",
-        role: "Hardware Director",
-        tagline: "Where silicon meets reality",
-        bio: "Expert in embedded systems and industrial robotics. Designed ARISE's proprietary hardware platform.",
-        detailedBio: "Jordan brings a unique blend of mechanical engineering and electronics expertise. With experience ranging from consumer electronics to industrial automation, he ensures our hardware is not just functional but manufacturable at scale. His designs balance performance, reliability, and cost-effectiveness.",
-        skills: ["Embedded Systems", "PCB Design", "Mechatronics", "3D Printing", "FPGA", "SolidWorks"],
-        expertise: ["Hardware Prototyping", "DFM/DFA", "Thermal Management", "EMC/EMI Compliance"],
-        projects: ["CHASSIS v2", "Project AEGIS", "SENSOR Array v3"],
-        achievements: [
-            "CES Innovation Award",
-            "10+ Patents in Robotics Hardware",
-            "iF Design Award - Product Design",
-            "ASME Young Engineer of the Year"
-        ],
-        education: [
-            "Georgia Tech - MS Mechanical Engineering",
-            "MIT - BS Electrical Engineering",
-            "Stanford - Executive Program in Manufacturing"
-        ],
-        experience: [
-            "Apple - Hardware Engineering Lead (6 years)",
-            "Tesla - Autopilot Hardware Team",
-            "Boston Dynamics - Mechanical Engineer"
-        ],
-        social: {
-            instagram: "@alexm.robotics", // Add Instagram
-            twitter: "@jordan_robotics",
-            linkedin: "jrivera-hw",
-            github: "jordan-hw",
-            email: "jordan@arisehq.tech"
-        },
-        photoColor: "#fbc531",
-        avatar: "./assets/images/team/jordan-rivera.jpg",
-        joined: "2022",
-        location: "Austin, TX",
-        category: "engineering"
-    },
+  id:3 ,
+  name: "Sharanya Domalapally",
+  role: "AI/ML Engineer & Content Lead",
+  tagline: "Building AI tools and sharing the journey",
+
+  bio: "AI & ML undergraduate working on practical AI tools, automation projects, and web-based solutions. Also represents ARISE through content creation and vlogging.",
+
+  detailedBio: "Currently pursuing B.Tech in Artificial Intelligence & Machine Learning. Enjoys working with Python, data analysis, and simple machine learning workflows. At ARISE, I contributes to AI-related development and also plays a key role in presenting the team’s work through content, videos, and outreach.",
+
+  skills: {
+  ai_ml_and_data: [
+    "Python for AI/ML",
+    "Exploratory Data Analysis (EDA)",
+    "Basic Machine Learning Models",
+    "NLP Basics",
+    "Data Visualization",
+    "Feature Analysis"
+  ],
+
+  programming_and_software: [
+    "Python",
+    "C (Basic)",
+    "JavaScript",
+    "Logic Building",
+    "Automation Scripting"
+  ],
+
+  web_development: [
+    "HTML5",
+    "CSS3",
+    "Bootstrap",
+    "Responsive Design",
+    "Frontend UI Development"
+  ],
+
+  tools_and_platforms: [
+    "Git & GitHub",
+    "VS Code",
+    "Dataset Handling",
+    "Basic ML Toolchains"
+  ],
+
+  content_and_communication: [
+    "Technical Content Creation",
+    "Explaining AI Concepts Simply",
+    "Vlogging & On-Camera Presence",
+    "Project Presentation",
+    "Community Outreach"
+  ],
+
+  collaboration_and_execution: [
+    "Team Collaboration",
+    "Project Coordination",
+    "Documentation Support",
+    "Peer Learning & Mentoring"
+  ]
+}
+
+
+  expertise: [
+    "Python Development",
+    "Data Analysis",
+    "Frontend Web Development",
+    "Content Creation"
+  ],
+
+  projects: [
+    "Automated EDA Tool",
+    "StartupIndia Web Platform",
+    "Python Voice Bot"
+  ],
+
+  achievements: [
+    "Built multiple AI and automation projects",
+    "Completed a web development internship"
+  ],
+
+  education: [
+    "B.Tech – Artificial Intelligence & Machine Learning (Ongoing, Expected 2027)"
+  ],
+
+  experience: [
+    "Web Developer Intern – CraftYourCareer’s",
+    "Student Tribe – Campus Ambassador"
+  ],
+
+  social: {
+    instagram: "",
+    twitter: "",
+    linkedin: "linkedin.com/in/sharanya2005",
+    github: "github.com/shaxxxxxx",
+    email: "sharanyasukruthaa@gmail.com"
+  },
+
+  photoColor: "#fbc531",
+  avatar: "./assets/images/team/Sharanya.jpg",
+  joined: "2025",
+  location: "Hyderabad, India",
+  category: "engineering"
+}
+,
     {
         id: 4,
         name: "Samira Khan",
