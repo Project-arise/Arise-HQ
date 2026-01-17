@@ -13,16 +13,16 @@ export const siteConfig = {
     },
     
     socialLinks: {
-        email: "contact@arisehq.tech",
+        email: "project.mmrei@gmail.com",
         github: "https://github.com/project-arise",
-        twitter: "https://twitter.com/arisehq",
+        twitter: "https://twitter.com/",
         instagram: "https://instagram.com/arise.core", // Added Instagram
-        linkedin: "https://linkedin.com/company/arisehq",
-        youtube: "https://youtube.com/@arisehq"
+        linkedin: "https://linkedin.com/company/arise-core",
+        youtube: "https://youtube.com/@"
     },
     
     mission: "To pioneer autonomous robotics systems that solve complex real-world problems and accelerate humanity's progress.",
     vision: "A future where intelligent machines work alongside humans to overcome our greatest challenges.",
     
-    notice: "ARISE HQ is a closed facility. No recruitment. No public access."
+    notice: "ARISE HQ is Prototype-phase robotics lab focused on real-world builds."
 };
