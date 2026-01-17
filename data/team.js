@@ -1,6 +1,6 @@
 export const teamMembers = [
     {
-  id:3 ,
+  id:1 ,
   name: "Metla Vishnu Vardhan Kumar",
   role: "Founder | Robotics & IoT Builder | Systems Generalist",
   tagline: "Builds first, figures out later",
@@ -9,54 +9,21 @@ export const teamMembers = [
 
   detailedBio: "Currently pursuing B.Tech in Computer Science & IoT, with a diploma background in Automobile Engineering. I work hands-on across robotics, IoT systems, electronics, mechanical design, and basic software. My journey has been chaotic—multiple projects, competitions, hackathons, leadership roles, and failed attempts—but driven by a constant need to build real systems rather than stay in theory. And founded Project ARISE by bringing together people from different disciplines, with the long-term goal of building an assistant robot capable of emotional intelligence for mental support and physical assistance. Still learning, still building, still under construction.",
 
-  skills: {
-  robotics_and_iot: [
-    "Robotics Basics",
-    "IoT Systems",
-    "Microcontrollers (Arduino-class)",
-    "ESP8266 (Exposure)",
-    "Sensors & Actuators",
-    "Automation Logic",
-    "ROS2 (Learning Stage)"
-  ],
+  skills: [
+  "Robotics Prototyping",
+  "IoT Systems",
+  "Microcontrollers (Arduino)",
+  "Sensors & Actuators",
+  "Automation Logic",
+  "Electronics Integration",
+  "Python",
+  "ROS2 (Basics)",
+  "CAD & Mechanical Design",
+  "Vehicle Diagnostics",
+  "Project Management",
+  "Leadership"
+]
 
-  electronics_and_embedded: [
-    "Electronics Integration",
-    "Embedded Programming (Basic)",
-    "Motor Control (DC & Servo)",
-    "Power Management",
-    "Hardware Debugging"
-  ],
-
-  software_and_programming: [
-    "Python",
-    "Basic C / C++",
-    "Control Logic",
-    "Web Development (Basic)",
-    "Vibe Coding"
-  ],
-
-  mechanical_and_design: [
-    "Mechanical Engineering Fundamentals",
-    "CAD & Simulations",
-    "Chassis & Structure Understanding",
-    "Vehicle Inspection & Automotive Problem Solving"
-  ],
-
-  leadership_and_execution: [
-    "Project Management",
-    "Team Coordination",
-    "Leadership",
-    "Communication",
-    "Cross-Disciplinary Collaboration"
-  ],
-
-  business_and_operations: [
-    "Business & Billing Management",
-    "Lead Generation",
-    "Operations Support"
-  ]
-}
 ,
 
   expertise: [
@@ -121,36 +88,18 @@ export const teamMembers = [
 
   detailedBio: "Plays a key role in shaping how ARISE communicates its ideas, projects, and vision. Responsible for pitching decks, technical documentation, and structured storytelling around builds. Has hands-on exposure to AI/ML automations and enjoys simplifying complex technical concepts for diverse audiences. Actively involved in hosting events, speaking sessions, and acting as the public voice of ARISE during presentations and discussions.",
 
-  skills: {
-    communication_and_presentation: [
-      "Public Speaking",
-      "Pitching & Storytelling",
-      "Technical Presentation",
-      "Event Hosting",
-      "Stakeholder Communication"
-    ],
-
-    documentation_and_strategy: [
-      "Technical Documentation",
-      "Pitch Deck Creation",
-      "Project Explanation & Structuring",
-      "Problem–Solution Framing"
-    ],
-
-    ai_and_automation: [
-      "AI/ML Concepts",
-      "Automation Workflows",
-      "Python (Applied for Automation)",
-      "AI Tool Integration"
-    ],
-
-    collaboration_and_execution: [
-      "Cross-Team Coordination",
-      "Idea Validation",
-      "Requirement Gathering",
-      "Team Communication"
-    ]
-  },
+  skills: [
+  "Pitching & Storytelling",
+  "Technical Documentation",
+  "Public Speaking",
+  "Presentation Design",
+  "Event Hosting",
+  "AI/ML Automations",
+  "Python (Automation)",
+  "Stakeholder Communication",
+  "Team Coordination"
+]
+,
 
   expertise: [
     "Pitching Technical Ideas",
@@ -202,54 +151,20 @@ export const teamMembers = [
 
   detailedBio: "Currently pursuing B.Tech in Artificial Intelligence & Machine Learning. Enjoys working with Python, data analysis, and simple machine learning workflows. At ARISE, I contributes to AI-related development and also plays a key role in presenting the team’s work through content, videos, and outreach.",
 
-  skills: {
-  ai_ml_and_data: [
-    "Python for AI/ML",
-    "Exploratory Data Analysis (EDA)",
-    "Basic Machine Learning Models",
-    "NLP Basics",
-    "Data Visualization",
-    "Feature Analysis"
-  ],
+  skills: [
+  "Python",
+  "Exploratory Data Analysis (EDA)",
+  "Basic Machine Learning",
+  "NLP Basics",
+  "AI Automation",
+  "Data Visualization",
+  "HTML & CSS",
+  "JavaScript",
+  "Frontend Web Development",
+  "Technical Content Creation",
+  "Presentation Skills"
+]
 
-  programming_and_software: [
-    "Python",
-    "C (Basic)",
-    "JavaScript",
-    "Logic Building",
-    "Automation Scripting"
-  ],
-
-  web_development: [
-    "HTML5",
-    "CSS3",
-    "Bootstrap",
-    "Responsive Design",
-    "Frontend UI Development"
-  ],
-
-  tools_and_platforms: [
-    "Git & GitHub",
-    "VS Code",
-    "Dataset Handling",
-    "Basic ML Toolchains"
-  ],
-
-  content_and_communication: [
-    "Technical Content Creation",
-    "Explaining AI Concepts Simply",
-    "Vlogging & On-Camera Presence",
-    "Project Presentation",
-    "Community Outreach"
-  ],
-
-  collaboration_and_execution: [
-    "Team Collaboration",
-    "Project Coordination",
-    "Documentation Support",
-    "Peer Learning & Mentoring"
-  ]
-}
 
 ,
   expertise: [
