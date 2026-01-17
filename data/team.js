@@ -251,7 +251,7 @@ export const teamMembers = [
   ]
 }
 
-
+,
   expertise: [
     "Python Development",
     "Data Analysis",
