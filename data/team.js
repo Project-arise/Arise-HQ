@@ -72,7 +72,7 @@ export const teamMembers = [
         },
 
   photoColor: "#00a8ff",
-  avatar: "/Arise-HQ/assets/images/team/Vishnu.jpg",
+  avatar: "./assets/images/team/Vishnu.jpg",
   joined: "2025",
   location: "Hyderabad, India",
   category: "leadership"
