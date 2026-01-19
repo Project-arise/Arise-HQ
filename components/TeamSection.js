@@ -76,14 +76,16 @@ export class TeamSection {
                 <div class="card-glow" style="background: ${member.photoColor}"></div>
                 
                 <div class="card-header">
+                    
     <div class="member-photo">
         <img src="${member.avatar}" alt="${member.name}" 
              onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\"member-photo-placeholder\" style=\"background: ${member.photoColor}\"><span>${member.name.charAt(0)}</span></div>';">
     </div>
-    <h3 class="member-name">${member.name}</h3>
-    <div class="member-role">${member.role}</div>
-    <div class="member-tagline">${member.tagline}</div>
-</div>
+    
+                    <h3 class="member-name">${member.name}</h3>
+                    <div class="member-role">${member.role}</div>
+                    <div class="member-tagline">${member.tagline}</div>
+                </div>
                 
                 <div class="card-body">
                     <div class="member-bio">
