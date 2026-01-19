@@ -204,4 +204,3 @@ export class ProfileModal {
 
 
 
-in this profile pic isnt showing its showing first letter instead
