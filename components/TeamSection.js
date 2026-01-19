@@ -71,67 +71,75 @@ export class TeamSection {
     }
 
     renderMemberCard(member) {
-        return `
-            <div class="team-card animate-on-scroll" data-member-id="${member.id}" data-category="${member.category}">
-                <div class="card-glow" style="background: ${member.photoColor}"></div>
-                
-                <div class="card-header">
-                    
-    <div class="member-photo">
-        <img src="${member.avatar}" alt="${member.name}" 
-             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\"member-photo-placeholder\" style=\"background: ${member.photoColor}\"><span>${member.name.charAt(0)}</span></div>';">
-    </div>
-    
-                    <h3 class="member-name">${member.name}</h3>
-                    <div class="member-role">${member.role}</div>
-                    <div class="member-tagline">${member.tagline}</div>
+    return `
+        <div class="team-card animate-on-scroll" data-member-id="${member.id}" data-category="${member.category}">
+            <div class="card-glow" style="background: ${member.photoColor}"></div>
+            
+            <div class="card-header">
+                <!-- Replace the placeholder with actual image -->
+                <div class="member-photo">
+                    <img src="${member.avatar}" alt="${member.name}" 
+                         loading="lazy"
+                         onerror="
+                            this.onerror=null;
+                            this.style.display='none';
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'member-photo-placeholder';
+                            placeholder.style.background = '${member.photoColor}';
+                            placeholder.innerHTML = '<span>${member.name.charAt(0)}</span>';
+                            this.parentElement.appendChild(placeholder);
+                         ">
+                </div>
+                <h3 class="member-name">${member.name}</h3>
+                <div class="member-role">${member.role}</div>
+                <div class="member-tagline">${member.tagline}</div>
+            </div>
+            
+            <!-- Rest of your code remains the same -->
+            <div class="card-body">
+                <div class="member-bio">
+                    <p>${member.bio}</p>
                 </div>
                 
-                <div class="card-body">
-                    <div class="member-bio">
-                        <p>${member.bio}</p>
+                <div class="member-skills">
+                    <h4>Core Competencies</h4>
+                    <div class="skills-list">
+                        ${member.skills.slice(0, 4).map(skill => `
+                            <span class="skill-tag">${skill}</span>
+                        `).join('')}
+                        ${member.skills.length > 4 ? '<span class="skill-tag">+' + (member.skills.length - 4) + ' more</span>' : ''}
                     </div>
-                    
-                    <div class="member-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            ${member.skills.slice(0, 4).map(skill => `
-                                <span class="skill-tag">${skill}</span>
-                            `).join('')}
-                            ${member.skills.length > 4 ? '<span class="skill-tag">+' + (member.skills.length - 4) + ' more</span>' : ''}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card-footer">
-                    <div class="social-links">
-                        ${member.social.instagram ? `
-                            <a href="https://instagram.com/${member.social.instagram.replace('@', '')}" 
-                            class="social-link instagram" target="_blank" rel="noopener">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        ` : ''}
-                        ${member.social.twitter ? `
-                            <a href="https://twitter.com/${member.social.twitter.replace('@', '')}" 
-                               class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        ` : ''}
-                        ${member.social.linkedin ? `
-                            <a href="https://linkedin.com/in/${member.social.linkedin}" 
-                               class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        ` : ''}
-                    </div>
-                    <button class="view-profile-btn" data-member="${member.id}" aria-label="View full profile">
-                        View Profile
-                    </button>
                 </div>
             </div>
-        `;
-    }
-
+            
+            <div class="card-footer">
+                <div class="social-links">
+                    ${member.social.instagram ? `
+                        <a href="https://instagram.com/${member.social.instagram.replace('@', '')}" 
+                        class="social-link instagram" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    ` : ''}
+                    ${member.social.twitter ? `
+                        <a href="https://twitter.com/${member.social.twitter.replace('@', '')}" 
+                           class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    ` : ''}
+                    ${member.social.linkedin ? `
+                        <a href="https://linkedin.com/in/${member.social.linkedin}" 
+                           class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    ` : ''}
+                </div>
+                <button class="view-profile-btn" data-member="${member.id}" aria-label="View full profile">
+                    View Profile
+                </button>
+            </div>
+        </div>
+    `;
+}
     setupFiltering() {
         const filterButtons = document.querySelectorAll('.team-filters .filter');
         const teamGrid = document.getElementById('team-grid');
