@@ -20,7 +20,7 @@ export class ProfileModal {
                     
                     <div class="profile-header">
                         <div class="profile-avatar">
-                            <img src="${member.avatar}" alt="${member.name}" 
+                            <img src="${member.avatar}" 
                                  onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22${member.photoColor.replace('#', '%23')}%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2240%22>${member.name.charAt(0)}</text></svg>'">
                         </div>
                         <div class="profile-info">
