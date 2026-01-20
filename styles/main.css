@@ -3297,3 +3297,124 @@ body {
 .nav-link i {
     font-size: 1rem;
 }
+
+
+/* Navigation Controller Styles */
+
+/* Mobile Menu State */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+body.mobile-menu-open .nav-links-mobile {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+body.mobile-menu-open .nav-mobile-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Scroll to Top Button */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 5px 15px rgba(156, 136, 255, 0.3);
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    background: var(--color-secondary);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(156, 136, 255, 0.4);
+}
+
+/* Scrolled Navbar */
+.navbar.scrolled {
+    background: rgba(18, 18, 24, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background: var(--color-primary);
+    color: white !important;
+    box-shadow: 0 5px 15px rgba(156, 136, 255, 0.2);
+}
+
+.nav-link.active i {
+    color: white;
+}
+
+.nav-link-mobile.active {
+    background: var(--color-primary);
+    color: white !important;
+}
+
+/* Nav Indicator */
+.nav-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+}
+
+/* Mobile Menu Animations */
+.nav-links-mobile {
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+}
+
+.nav-mobile-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .scroll-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    
+    .navbar.scrolled {
+        padding: 10px 0;
+    }
+}
