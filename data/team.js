@@ -137,8 +137,8 @@ export const teamMembers = [
         },
         photoColor: "#9c88ff",
         avatar: "./assets/images/team/Rahul.jpg",
-        joined: "2021",
-        location: "Boston, MA",
+        joined: "2025",
+        location: "Hyderabad,India",
         category: "research"
     },
     {
@@ -210,44 +210,77 @@ export const teamMembers = [
 }
 ,
     {
-        id: 4,
-        name: "Samira Khan",
-        role: "Systems Architect",
-        tagline: "Connecting the dots",
-        bio: "Specializes in distributed systems and real-time processing. Ensures ARISE platforms operate at peak efficiency.",
-        detailedBio: "Samira architects the software infrastructure that enables our robots to work together seamlessly. Her background in distributed systems and cloud computing ensures our platforms are scalable, resilient, and secure. She's passionate about building systems that just work, no matter the scale.",
-        skills: ["Distributed Systems", "Real-time OS", "Network Security", "Cloud Infrastructure", "Kubernetes", "Microservices"],
-        expertise: ["System Reliability", "Performance Optimization", "Security Architecture", "DevOps/SRE"],
-        projects: ["NEXUS Core", "SENTINEL Network", "ARISE Cloud Platform"],
-        achievements: [
-            "AWS Hero Award",
-            "Open Source Contributor of the Year",
-            "USENIX Best Paper - Systems",
-            "Black Hat Speaker - Security"
-        ],
-        education: [
-            "UC Berkeley - PhD Computer Science",
-            "CMU - MS Software Engineering",
-            "University of Waterloo - BS Computer Engineering"
-        ],
-        experience: [
-            "Netflix - Senior Systems Engineer (5 years)",
-            "Google - Site Reliability Engineering",
-            "Cloudflare - Infrastructure Security"
-        ],
-        social: {
-            instagram: "@alexm.robotics", // Add Instagram
-            twitter: "@samira_tech",
-            linkedin: "samirak-arch",
-            github: "samira-sys",
-            email: "samira@arisehq.tech"
-        },
-        photoColor: "#00a8ff",
-        avatar: "./assets/images/team/samira-khan.jpg",
-        joined: "2022",
-        location: "Seattle, WA",
-        category: "engineering"
-    },
+  id:4,
+  name: "Dommata Vishweshwar Goud",
+  role: "Mechanical Design & Fabrication Lead",
+  tagline: "Turns designs into real hardware",
+
+  bio: "Mechanical engineering intern with strong hands-on experience in fabrication, prototyping, and manufacturing-focused design.",
+
+  detailedBio: "Mechanical engineering student with extensive exposure to fabrication labs, prototyping environments, and industrial design workflows. Has worked with 3D printing, laser cutting, CNC machining, and sheet metal fabrication across internships and fellowships. Contributed to real-world projects ranging from robotic systems to aerospace and manufacturing components, while also engaging in innovation programs, workshops, and community-driven problem solving.",
+
+  skills: [
+    "Mechanical Design",
+    "3D Printing",
+    "Laser Cutting",
+    "CNC Milling",
+    "Sheet Metal Fabrication",
+    "Rapid Prototyping",
+    "SolidWorks",
+    "Fusion 360",
+    "AutoCAD",
+    "Manufacturing Support",
+    "Reverse Engineering",
+    "Quality & Product Development"
+  ],
+
+  expertise: [
+    "Fabrication & Manufacturing",
+    "Design for Manufacturability",
+    "Prototyping & Testing",
+    "Mechanical System Development"
+  ],
+
+  projects: [
+    "Robotic Arm – Industrial Automation",
+    "TMAZE Structural Fabrication Project",
+    "Cotton Spunk – Mechanical Processing Solution",
+    "Aerospace & Manufacturing Components (Skyroot, BDL, BHEL)"
+  ],
+
+  achievements: [
+    "1st Place – 3D Printing Hackathon (National Level, Osmania University)",
+    "Designed and prototyped industrial-grade components",
+    "Conducted technical workshops on CAD and 3D printing"
+  ],
+
+  education: [
+    "B.E – Mechanical Engineering (Pursuing)",
+    "Diploma – Mechanical Engineering (GPA 9.2)"
+  ],
+
+  experience: [
+    "Mechanical Intern – TWORKS",
+    "Mechanical Design Intern – IPOG Industrial Technologies",
+    "Intern – ACIC-CBIT",
+    "GRIP Fellowship Participant"
+  ],
+
+  social: {
+    instagram: "@vishu.5463",
+    twitter: "",
+    linkedin: "vishweshwar-d-4735622a6",
+    github: "",
+    email: "dvishu624@gmail.com"
+  },
+
+  photoColor: "#00a8ff",
+  avatar: "./assets/images/team/Vishweshwar.jpg",
+  joined: "2025",
+  location: "Telangana, India",
+  category: "engineering"
+}
+,
     {
         id: 5,
         name: "Dr. Leo Zhang",
