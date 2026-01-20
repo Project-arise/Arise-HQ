@@ -4,6 +4,17 @@ import { teamMembers } from '../data/team.js';
 export class ProjectModal {
     constructor() {
         this.currentProject = null;
+        this.isOpen = false;
+        this.initBackNavigation();
+    }
+
+    initBackNavigation() {
+        // Handle browser back button
+        window.addEventListener('popstate', (event) => {
+            if (this.isOpen) {
+                this.hide();
+            }
+        });
     }
 
     render(projectId) {
@@ -29,8 +40,13 @@ export class ProjectModal {
         return `
             <div class="project-modal-overlay" id="project-modal">
                 <div class="project-modal">
-                    <button class="project-close" id="project-close-btn">
+                    <button class="project-close" id="project-close-btn" aria-label="Close project">
                         <i class="fas fa-times"></i>
+                    </button>
+                    
+                    <!-- Mobile Back Button -->
+                    <button class="mobile-back-btn" id="project-mobile-back-btn" aria-label="Go back">
+                        <i class="fas fa-arrow-left"></i> Back
                     </button>
                     
                     <div class="project-modal-header" style="border-color: ${statusColor}">
@@ -83,7 +99,7 @@ export class ProjectModal {
                             <h3><i class="fas fa-users"></i> Team</h3>
                             <div class="project-team-large">
                                 ${projectTeam.map(member => `
-                                    <div class="project-team-member" data-member-id="${member.id}">
+                                    <div class="project-team-member" data-member-id="${member.id}" role="button" tabindex="0">
                                         <div class="team-member-avatar" style="background: ${member.photoColor}">
                                             ${member.name.charAt(0)}
                                         </div>
@@ -155,6 +171,13 @@ export class ProjectModal {
     }
 
     show(projectId) {
+        // Store scroll position
+        this.scrollPosition = window.pageYOffset;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this.scrollPosition}px`;
+        document.body.style.width = '100%';
+        
         const modalContainer = document.getElementById('project-modal-container');
         if (!modalContainer) {
             // Create container if it doesn't exist
@@ -172,10 +195,29 @@ export class ProjectModal {
             }, 10);
         }
         
-        // Add close event listener
+        // Add to browser history for back button support
+        const project = projects.find(p => p.id === parseInt(projectId));
+        if (project) {
+            const projectUrl = `#project-${project.id}-${project.name.toLowerCase().replace(/\s+/g, '-')}`;
+            window.history.pushState({ projectOpen: true, projectId: projectId }, '', projectUrl);
+        }
+        
+        this.isOpen = true;
+        
+        this.attachEventListeners();
+    }
+
+    attachEventListeners() {
+        // Close button
         const closeBtn = document.getElementById('project-close-btn');
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.hide());
+        }
+        
+        // Mobile back button
+        const mobileBackBtn = document.getElementById('project-mobile-back-btn');
+        if (mobileBackBtn) {
+            mobileBackBtn.addEventListener('click', () => this.hide());
         }
         
         // Close on overlay click
@@ -189,11 +231,21 @@ export class ProjectModal {
         }
         
         // Close on escape key
-        document.addEventListener('keydown', (e) => {
+        const escapeHandler = (e) => {
             if (e.key === 'Escape') {
                 this.hide();
             }
-        });
+        };
+        document.addEventListener('keydown', escapeHandler);
+        this.escapeHandler = escapeHandler; // Store reference for removal
+        
+        // Handle browser back button
+        this.backButtonHandler = () => {
+            if (this.isOpen) {
+                this.hide();
+            }
+        };
+        window.addEventListener('popstate', this.backButtonHandler);
         
         // Team member click events
         document.querySelectorAll('.project-team-member').forEach(member => {
@@ -208,10 +260,22 @@ export class ProjectModal {
                     document.dispatchEvent(event);
                 }, 300);
             });
+            
+            // Add keyboard support for accessibility
+            member.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const memberId = e.currentTarget.dataset.memberId;
+                    this.hide();
+                    setTimeout(() => {
+                        const event = new CustomEvent('arise:profile:show', {
+                            detail: { memberId: parseInt(memberId) }
+                        });
+                        document.dispatchEvent(event);
+                    }, 300);
+                }
+            });
         });
-        
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
     }
 
     hide() {
@@ -225,8 +289,30 @@ export class ProjectModal {
                     modalContainer.innerHTML = '';
                 }
                 
-                // Restore body scroll
-                document.body.style.overflow = '';
+                // Restore scroll position and body styles
+                document.body.style.removeProperty('overflow');
+                document.body.style.removeProperty('position');
+                document.body.style.removeProperty('top');
+                document.body.style.removeProperty('width');
+                window.scrollTo(0, this.scrollPosition);
+                
+                // Remove from history if we're going back
+                if (window.history.state && window.history.state.projectOpen) {
+                    window.history.back();
+                } else {
+                    // Just replace state to remove project URL
+                    window.history.replaceState({}, '', window.location.pathname + window.location.search);
+                }
+                
+                // Clean up event listeners
+                if (this.escapeHandler) {
+                    document.removeEventListener('keydown', this.escapeHandler);
+                }
+                if (this.backButtonHandler) {
+                    window.removeEventListener('popstate', this.backButtonHandler);
+                }
+                
+                this.isOpen = false;
             }, 300);
         }
     }
