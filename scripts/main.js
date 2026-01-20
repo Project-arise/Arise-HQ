@@ -9,76 +9,14 @@ import { ProfileModal } from '../components/ProfileModal.js';
 import { ProjectModal } from '../components/ProjectModal.js';
 
 // Import Controllers
-import { NavigationController } from './controllers/navigation.js';
-import { AnimationController } from './controllers/animations.js';
+import { NavigationController } from './navigation.js';
+import { AnimationController } from './animations.js';
 
 // Import Data
 import { siteConfig } from '../data/siteConfig.js';
 
 class ARISEApp {
     constructor() {
-        this.components = {
-            navbar: null,
-            hero: null,
-            team: null,
-            projects: null,
-            about: null,
-            contact: null,
-            profileModal: null,
-            projectModal: null
-        };
-        
-        this.controllers = {
-            navigation: null,
-            animations: null
-        };
-        
-        this.currentSection = 'home';
-        this.isInitialized = false;
-        this.init();
-    }
-
-    init() {
-        // Initialize after DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setup());
-        } else {
-            this.setup();
-        }
-    }
-
-    setup() {
-        if (this.isInitialized) return;
-        
-        try {
-            // Initialize components
-            this.initComponents();
-            
-            // Render components
-            this.renderComponents();
-            
-            // Initialize controllers
-            this.initControllers();
-            
-            // Setup event listeners
-            this.setupEventListeners();
-            
-            // Initialize features
-            this.initFeatures();
-            
-            // Handle initial state
-            this.handleInitialState();
-            
-            this.isInitialized = true;
-            
-            console.log('🚀 ARISE HQ Initialized');
-            
-        } catch (error) {
-            console.error('Failed to initialize ARISE App:', error);
-        }
-    }
-
-    initComponents() {
         this.components = {
             navbar: new Navbar(),
             hero: new Hero(),
@@ -89,175 +27,130 @@ class ARISEApp {
             profileModal: new ProfileModal(),
             projectModal: new ProjectModal()
         };
+        
+        this.controllers = {
+            navigation: null,
+            animations: null
+        };
+        
+        this.currentSection = 'home';
+        this.init();
+    }
+
+    init() {
+        // Load components
+        this.renderComponents();
+        
+        // Initialize controllers
+        this.controllers.navigation = new NavigationController();
+        this.controllers.animations = new AnimationController();
+        
+        // Setup event listeners
+        this.setupEventListeners();
+        
+        // Handle initial scroll position
+        this.handleScroll();
+        
+        // Initialize any additional features
+        this.initFeatures();
+        
+        console.log('🚀 ARISE HQ Initialized');
     }
 
     renderComponents() {
         // Render navbar
         const navbarContainer = document.getElementById('navbar-container');
-        if (navbarContainer && this.components.navbar) {
+        if (navbarContainer) {
             navbarContainer.innerHTML = this.components.navbar.render();
-            
-            // Initialize navbar event listeners
-            if (this.components.navbar.initEventListeners) {
-                this.components.navbar.initEventListeners();
-            }
         }
         
-        // Render hero section
+        // Render sections
         const heroContainer = document.getElementById('hero-container');
-        if (heroContainer && this.components.hero) {
+        if (heroContainer) {
             heroContainer.innerHTML = this.components.hero.render();
         }
         
-        // Render team section
         const teamContainer = document.getElementById('team-container');
-        if (teamContainer && this.components.team) {
+        if (teamContainer) {
             teamContainer.innerHTML = this.components.team.render();
         }
         
-        // Render projects section
         const projectsContainer = document.getElementById('projects-container');
-        if (projectsContainer && this.components.projects) {
+        if (projectsContainer) {
             projectsContainer.innerHTML = this.components.projects.render();
         }
         
-        // Render about section
         const aboutContainer = document.getElementById('about-container');
-        if (aboutContainer && this.components.about) {
+        if (aboutContainer) {
             aboutContainer.innerHTML = this.components.about.render();
         }
         
-        // Render contact section
         const contactContainer = document.getElementById('contact-container');
-        if (contactContainer && this.components.contact) {
+        if (contactContainer) {
             contactContainer.innerHTML = this.components.contact.render();
         }
     }
 
-    initControllers() {
-        // Initialize navigation controller
-        this.controllers.navigation = new NavigationController();
-        
-        // Initialize animation controller
-        this.controllers.animations = new AnimationController();
-    }
-
     setupEventListeners() {
-        // Click event delegation for dynamic elements
-        document.addEventListener('click', (e) => this.handleClick(e));
+        // Navigation clicks
+        document.addEventListener('click', (e) => {
+            this.handleClick(e);
+        });
         
-        // Handle profile modal events
+        // Profile modal events
         document.addEventListener('arise:profile:show', (e) => {
             this.showMemberProfile(e.detail.memberId);
         });
         
-        // Handle project modal events
+        // Project modal events
         document.addEventListener('arise:project:show', (e) => {
             this.showProjectDetails(e.detail.projectId);
         });
         
-        // Handle custom section navigation events
-        document.addEventListener('arise:section:show', (e) => {
-            if (e.detail && e.detail.sectionId) {
-                this.showSection(e.detail.sectionId);
-            }
-        });
-        
-        // Window scroll event
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                this.handleScroll();
-            }, 100);
-        });
-        
-        // Window resize event
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.handleResize();
-            }, 250);
-        });
+        // Window events
+        window.addEventListener('scroll', () => this.handleScroll());
+        window.addEventListener('resize', () => this.handleResize());
         
         // Keyboard events
         document.addEventListener('keydown', (e) => this.handleKeydown(e));
-        
-        // Hash change events
-        window.addEventListener('hashchange', () => {
-            this.handleHashChange();
-        });
     }
 
     handleClick(e) {
-        // Handle view profile button clicks
-        const viewProfileBtn = e.target.closest('.view-profile-btn');
-        if (viewProfileBtn) {
-            const memberId = viewProfileBtn.getAttribute('data-member');
-            if (memberId) {
-                this.showMemberProfile(memberId);
-                e.preventDefault();
-            }
+        // Handle team member clicks for profile modal
+        if (e.target.closest('[data-member]')) {
+            const memberId = e.target.closest('[data-member]').dataset.member;
+            this.showMemberProfile(memberId);
+            e.preventDefault();
             return;
         }
         
-        // Handle team card clicks (except social links)
-        const teamCard = e.target.closest('.team-card');
-        if (teamCard && !e.target.closest('.social-link') && !e.target.closest('a')) {
-            const memberId = teamCard.getAttribute('data-member-id');
-            if (memberId) {
-                this.showMemberProfile(memberId);
-                e.preventDefault();
-            }
+        // Handle team card clicks
+        if (e.target.closest('.team-card')) {
+            const card = e.target.closest('.team-card');
+            const memberId = card.dataset.memberId;
+            this.showMemberProfile(memberId);
+            e.preventDefault();
             return;
         }
         
-        // Handle project detail button clicks
-        const viewProjectBtn = e.target.closest('.project-details-btn');
-        if (viewProjectBtn) {
-            const projectId = viewProjectBtn.getAttribute('data-project');
-            if (projectId) {
-                this.showProjectDetails(projectId);
-                e.preventDefault();
-            }
+        // Handle project details clicks
+        if (e.target.closest('[data-project]')) {
+            const projectId = e.target.closest('[data-project]').dataset.project;
+            this.showProjectDetails(projectId);
+            e.preventDefault();
             return;
         }
         
-        // Handle project card clicks
-        const projectCard = e.target.closest('.project-card');
-        if (projectCard && !e.target.closest('.project-links') && !e.target.closest('a')) {
-            const projectId = projectCard.getAttribute('data-project-id');
-            if (projectId) {
-                this.showProjectDetails(projectId);
-                e.preventDefault();
-            }
+        // Handle filter clicks
+        if (e.target.closest('.filter')) {
+            // Let the component handle filtering
             return;
         }
         
-        // Handle filter clicks - let components handle them
-        if (e.target.closest('.filter') || e.target.closest('.status-tab')) {
+        // Handle status tab clicks
+        if (e.target.closest('.status-tab')) {
+            // Let the component handle filtering
             return;
-        }
-        
-        // Handle navigation link clicks
-        const navLink = e.target.closest('.nav-link, .nav-link-mobile');
-        if (navLink) {
-            const href = navLink.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                const sectionId = href.substring(1);
-                if (sectionId) {
-                    this.showSection(sectionId);
-                    e.preventDefault();
-                }
-            }
-            return;
-        }
-        
-        // Close modals when clicking overlay
-        const modalOverlay = e.target.closest('.profile-modal-overlay, .project-modal-overlay');
-        if (modalOverlay && e.target === modalOverlay) {
-            this.closeAllModals();
         }
     }
 
@@ -266,15 +159,39 @@ class ARISEApp {
         if (e.key === 'Escape') {
             this.closeAllModals();
         }
-        
-        // Close mobile menu with Escape key
-        if (e.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) {
-            document.body.classList.remove('mobile-menu-open');
+    }
+
+    showMemberProfile(memberId) {
+        if (memberId) {
+            this.components.profileModal.show(memberId);
         }
     }
 
+    showProjectDetails(projectId) {
+        if (projectId) {
+            this.components.projectModal.show(projectId);
+        }
+    }
+
+    closeAllModals() {
+        // Hide profile modal
+        const profileModal = document.getElementById('profile-modal');
+        if (profileModal && profileModal.classList.contains('active')) {
+            this.components.profileModal.hide();
+        }
+        
+        // Hide project modal
+        const projectModal = document.getElementById('project-modal');
+        if (projectModal && projectModal.classList.contains('active')) {
+            this.components.projectModal.hide();
+        }
+        
+        // Close mobile menu
+        document.body.classList.remove('mobile-menu-open');
+    }
+
     handleScroll() {
-        // Update navbar active state based on scroll
+        // Update navbar active state
         const sections = document.querySelectorAll('section[id]');
         const scrollPosition = window.scrollY + 100;
         
@@ -290,10 +207,10 @@ class ARISEApp {
             }
         });
         
-        // Update section if changed
         if (newSection !== this.currentSection) {
             this.currentSection = newSection;
-            this.updateActiveNavSection(newSection);
+            this.components.navbar.setActiveSection(newSection);
+            this.updateNavbar();
         }
         
         // Update navbar style on scroll
@@ -308,132 +225,62 @@ class ARISEApp {
     }
 
     handleResize() {
-        // Close mobile menu on desktop
+        // Handle responsive behavior
         if (window.innerWidth > 768) {
             document.body.classList.remove('mobile-menu-open');
         }
         
-        // Re-initialize responsive elements
+        // Recalculate any responsive elements
         this.handleResponsiveElements();
-        
-        // Re-trigger animations if needed
-        if (this.controllers.animations && this.controllers.animations.init) {
-            this.controllers.animations.init();
-        }
-    }
-
-    handleHashChange() {
-        const hash = window.location.hash.substring(1);
-        
-        // Check for modal hashes first
-        const profileMatch = hash.match(/^profile-(\d+)-/);
-        const projectMatch = hash.match(/^project-(\d+)-/);
-        
-        if (profileMatch) {
-            // Profile modal hash
-            const memberId = profileMatch[1];
-            setTimeout(() => {
-                this.showMemberProfile(memberId);
-            }, 100);
-            return;
-        }
-        
-        if (projectMatch) {
-            // Project modal hash
-            const projectId = projectMatch[1];
-            setTimeout(() => {
-                this.showProjectDetails(projectId);
-            }, 100);
-            return;
-        }
-        
-        // Regular section navigation
-        if (hash && hash !== this.currentSection) {
-            this.showSection(hash);
-        }
-    }
-
-    handleInitialState() {
-        // Handle initial hash
-        const initialHash = window.location.hash.substring(1);
-        if (initialHash) {
-            this.handleHashChange();
-        }
-        
-        // Handle initial scroll position
-        this.handleScroll();
-        
-        // Initialize responsive elements
-        this.handleResponsiveElements();
-    }
-
-    updateActiveNavSection(sectionId) {
-        // Update navbar active section
-        if (this.components.navbar && this.components.navbar.setActiveSection) {
-            this.components.navbar.setActiveSection(sectionId);
-        }
-        
-        // Update nav links visually
-        this.updateNavLinks(sectionId);
-    }
-
-    updateNavLinks(sectionId) {
-        // Update desktop nav links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
-            if (href === `#${sectionId}`) {
-                link.classList.add('active');
-            }
-        });
-        
-        // Update mobile nav links
-        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
-        mobileLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
-            if (href === `#${sectionId}`) {
-                link.classList.add('active');
-            }
-        });
     }
 
     handleResponsiveElements() {
-        // Handle responsive grid layouts
+        // Handle any responsive element adjustments
         const teamGrid = document.querySelector('.team-grid');
         const projectsGrid = document.querySelector('.projects-grid');
         
-        if (!teamGrid && !projectsGrid) return;
-        
         if (window.innerWidth < 768) {
-            // Mobile
-            if (teamGrid) teamGrid.style.gridTemplateColumns = '1fr';
-            if (projectsGrid) projectsGrid.style.gridTemplateColumns = '1fr';
+            // Mobile adjustments
+            if (teamGrid) {
+                teamGrid.style.gridTemplateColumns = '1fr';
+            }
+            if (projectsGrid) {
+                projectsGrid.style.gridTemplateColumns = '1fr';
+            }
         } else if (window.innerWidth < 1024) {
-            // Tablet
-            if (teamGrid) teamGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-            if (projectsGrid) projectsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            // Tablet adjustments
+            if (teamGrid) {
+                teamGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            }
+            if (projectsGrid) {
+                projectsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            }
         } else {
-            // Desktop
-            if (teamGrid) teamGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
-            if (projectsGrid) projectsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+            // Desktop adjustments
+            if (teamGrid) {
+                teamGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+            }
+            if (projectsGrid) {
+                projectsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+            }
+        }
+    }
+
+    updateNavbar() {
+        const navbarContainer = document.getElementById('navbar-container');
+        if (navbarContainer) {
+            navbarContainer.innerHTML = this.components.navbar.render();
         }
     }
 
     initFeatures() {
-        // Initialize smooth scrolling
+        // Initialize any additional features
         this.initSmoothScrolling();
-        
-        // Initialize intersection observers for animations
-        this.initScrollAnimations();
-        
-        // Initialize lazy loading
-        this.initLazyLoading();
+        this.initFilterCounts();
     }
 
     initSmoothScrolling() {
-        // Already handled by NavigationController, but keep as fallback
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 const href = anchor.getAttribute('href');
@@ -442,8 +289,7 @@ class ARISEApp {
                 const targetElement = document.querySelector(href);
                 if (targetElement) {
                     e.preventDefault();
-                    const navbar = document.querySelector('.navbar');
-                    const offset = navbar ? navbar.offsetHeight : 80;
+                    const offset = 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - offset;
                     
@@ -452,166 +298,71 @@ class ARISEApp {
                         behavior: 'smooth'
                     });
                     
-                    // Update active section
-                    const sectionId = href.replace('#', '');
-                    this.updateActiveNavSection(sectionId);
+                    // Update active nav link
+                    this.currentSection = href.replace('#', '');
+                    this.components.navbar.setActiveSection(this.currentSection);
+                    this.updateNavbar();
                 }
             });
         });
     }
 
-    initScrollAnimations() {
-        // Initialize scroll-triggered animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements with animation classes
-        document.querySelectorAll('.animate-on-scroll').forEach(element => {
-            observer.observe(element);
-        });
+    initFilterCounts() {
+        // Initialize filter counts after components are loaded
+        setTimeout(() => {
+            this.updateFilterCounts();
+        }, 500);
     }
 
-    initLazyLoading() {
-        // Initialize lazy loading for images
-        const lazyImages = document.querySelectorAll('img[data-src]');
+    updateFilterCounts() {
+        // Update filter counts if needed
+        const teamFilters = document.querySelectorAll('.team-filters .filter');
+        const projectTabs = document.querySelectorAll('.project-status-tabs .status-tab');
         
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
-            
-            lazyImages.forEach(img => imageObserver.observe(img));
-        } else {
-            // Fallback for older browsers
-            lazyImages.forEach(img => {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-            });
-        }
+        // You can add dynamic count updating here if needed
+        // For now, the counts are handled in the components
     }
 
     // Public API methods
-    showMemberProfile(memberId) {
-        if (memberId && this.components.profileModal) {
-            this.components.profileModal.show(memberId);
-        }
-    }
-
-    showProjectDetails(projectId) {
-        if (projectId && this.components.projectModal) {
-            this.components.projectModal.show(projectId);
-        }
-    }
-
     showSection(sectionId) {
         this.currentSection = sectionId;
-        this.updateActiveNavSection(sectionId);
+        this.components.navbar.setActiveSection(sectionId);
+        this.updateNavbar();
         
         const element = document.getElementById(sectionId);
         if (element) {
-            const navbar = document.querySelector('.navbar');
-            const offset = navbar ? navbar.offsetHeight : 80;
-            
             window.scrollTo({
-                top: element.offsetTop - offset,
+                top: element.offsetTop - 80,
                 behavior: 'smooth'
             });
-            
-            // Update URL
-            if (history.pushState) {
-                history.pushState(null, null, `#${sectionId}`);
-            }
         }
-    }
-
-    closeAllModals() {
-        // Hide profile modal
-        if (this.components.profileModal) {
-            this.components.profileModal.hide();
-        }
-        
-        // Hide project modal
-        if (this.components.projectModal) {
-            this.components.projectModal.hide();
-        }
-        
-        // Close mobile menu
-        document.body.classList.remove('mobile-menu-open');
     }
 
     refresh() {
-        // Re-render all components
+        // Refresh all components
         this.renderComponents();
-        
-        // Re-initialize controllers
-        if (this.controllers.animations && this.controllers.animations.init) {
-            this.controllers.animations.init();
-        }
-        
-        // Re-initialize features
+        this.controllers.animations.init();
         this.initFeatures();
-        
-        console.log('🔄 ARISE HQ Refreshed');
     }
 
     getCurrentSection() {
         return this.currentSection;
     }
 
-    // Utility methods
-    log(message, type = 'info') {
-        const prefix = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : 'ℹ️';
-        console.log(`${prefix} ARISE: ${message}`);
+    getTeamMember(memberId) {
+        // This would fetch from your team data
+        // For now, return the component's member
+        return null;
     }
 
-    error(message, error) {
-        console.error(`❌ ARISE Error: ${message}`, error);
-        
-        // Could show user-friendly error message here
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'arise-error';
-        errorDiv.innerHTML = `
-            <div class="error-content">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>${message}</span>
-                <button class="error-close"><i class="fas fa-times"></i></button>
-            </div>
-        `;
-        
-        errorDiv.querySelector('.error-close').addEventListener('click', () => {
-            errorDiv.remove();
-        });
-        
-        document.body.appendChild(errorDiv);
-        
-        setTimeout(() => {
-            if (errorDiv.parentNode) {
-                errorDiv.remove();
-            }
-        }, 5000);
+    getProject(projectId) {
+        // This would fetch from your project data
+        // For now, return the component's project
+        return null;
     }
 }
 
-// Initialize the application
+// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Create global instance
     window.ARISE = new ARISEApp();
@@ -624,28 +375,29 @@ document.addEventListener('DOMContentLoaded', () => {
             showSection: (section) => window.ARISE.showSection(section),
             refresh: () => window.ARISE.refresh(),
             showProfile: (memberId) => window.ARISE.showMemberProfile(memberId),
-            showProject: (projectId) => window.ARISE.showProjectDetails(projectId),
-            closeModals: () => window.ARISE.closeAllModals()
+            showProject: (projectId) => window.ARISE.showProjectDetails(projectId)
         };
     }
     
-    // Global error handling
+    // Handle hash-based navigation on load
+    if (window.location.hash) {
+        const section = window.location.hash.substring(1);
+        setTimeout(() => {
+            window.ARISE.showSection(section);
+        }, 100);
+    }
+    
+    // Error handling
     window.addEventListener('error', (e) => {
-        if (window.ARISE && window.ARISE.error) {
-            window.ARISE.error('An error occurred', e.error);
-        } else {
-            console.error('ARISE HQ Error:', e.error);
-        }
+        console.error('ARISE HQ Error:', e.error);
+        // You could add user-friendly error handling here
     });
     
     window.addEventListener('unhandledrejection', (e) => {
-        if (window.ARISE && window.ARISE.error) {
-            window.ARISE.error('A promise was rejected', e.reason);
-        } else {
-            console.error('ARISE HQ Promise Rejection:', e.reason);
-        }
+        console.error('ARISE HQ Promise Rejection:', e.reason);
+        // You could add user-friendly error handling here
     });
 });
 
-// Export for module usage
+// Export for module usage if needed
 export { ARISEApp };
