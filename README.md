@@ -10,7 +10,7 @@ The official website of Project ARISE - A next-gen robotics startup and deep-tec
 - Smooth animations
 
 ## Live Demo
-[arise-hq.vercel.app](https://arise-hq.vercel.app)
+[Arise-HQ](https://projectarise.online)
 
 ## Development
 ```bash
